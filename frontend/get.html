@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title> Inventory</title>
+    </head>
+    <style>
+        button {
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: #333;
+            color: #fff;
+            }
+
+        button:hover {
+            background-color: #2ecc07;
+            color: #fff;
+        }
+        body {
+          background-color: #e1dcdcc3;
+          font-family: Arial, sans-serif;
+        }
+        input[type="text"] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        }
+
+        input[type="text"]:focus {
+            border: 2px solid #555;
+        }
+        table {
+          border-collapse: collapse;
+          width: 90%;
+        }
+        th, td {
+          border: 1px solid #2ecc07;
+          padding: 8px;
+          text-align: left;
+        }
+        tr{
+          background-color: #A5D6A7;
+        }
+        tr:hover {
+          background-color: #2ecc07;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          background-color: #2ecc07;
+          font-weight: bold;
+        }
+      </style>
+    <script>
+        // callAPI function that takes the aurhorization token as parameter
+        var callAPI = (apiauthkey)=>{
+            // instantiate a headers object
+            var myHeaders = new Headers();
+            // add content type and authorization header to object 
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Authorization","Bearer " + apiauthkey);
+            // create a JSON object with parameters for API call and store in a variable
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow',
+            };
+            // make API call with parameters and use promises to get response
+            fetch("#", requestOptions)
+               .then(response => response.json())
+               .then(data => {
+                    const mydata= data.body;
+                    const arrays =JSON.parse(mydata);
+                    const table = document.createElement('table');
+                    table.border = '1'; // add a border to the table
+                    const headers = ['ID', 'Name', 'Quantity','Location','Unit Value ($)','Total Value ($)','Last Updated','Notes'];
+                    const thead = document.createElement('thead');
+                    const headerRow = document.createElement('tr');
+                    headers.forEach((header) => {
+                       const th = document.createElement('th');
+                       th.textContent = header;
+                       headerRow.appendChild(th);
+                    });
+                    thead.appendChild(headerRow);
+                    table.appendChild(thead);
+                    const tbody = document.createElement('tbody');
+                    arrays.forEach((array) => {
+                        const row = document.createElement('tr');
+                        array.forEach((cell) => {
+                            const td = document.createElement('td');
+                            td.textContent = cell;
+                            row.appendChild(td);
+                         });
+                    tbody.appendChild(row);
+                    });
+                    table.appendChild(tbody);
+                    document.getElementById("result").appendChild(table);
+                       })
+                    .catch(error => console.log('error', error));
+                }
+    </script>
+    <body>
+        <h1>INVENTORY!!</h1>
+        <form>
+            <label>Authentication Key:</label>
+            <input type="text" id="apiauthkey">
+            <!-- set button onClick method to call function we defined passing input values as parameters -->
+            <button type="button" onclick="callAPI(document.getElementById('apiauthkey').value)">GET</button><br><br>
+            <div id="result"></div>
+        </form>
+    </body>
+</html>

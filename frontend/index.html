@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title> frontend</title>
+    </head>
+    <style>
+        body {
+          background-color: #e1dcdcc3;
+          font-family: Arial, sans-serif;
+        }
+        #authlinks{
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        #authlinks:hover{
+            background-color: #3e8e41;
+        }
+        #links {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: black;
+            color: whitesmoke;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-right: 12px;
+        }
+
+    </style>
+    <body onload="showURLParameters()">
+        <h1> INVENTORY MANAGEMENT SYSTEM</h1>
+        <a id="authlinks" href="#"> Login</a>
+        <a id="authlinks" href="#"> Logout</a>
+        <br><br>
+        <a id="links" href="get.html"> View Invertory</a>
+        <a id="links" href="getfiltered.html"> Search</a>
+        <a id="links" href="upload.html">Add Data</a>
+        <a id="links" href="update.html">Update Inventory</a>
+        <a id="links" href="delete.html">Delete Data</a>
+        <p>AUTHENTICATION KEY:<br></p>
+        <div id="currentUrl">Your Authentication key will be displayed here once you log in</div>
+    </body>
+    <script>
+        var currentUrl = window.location.href;
+        
+        // Remove everything before the "#"
+        currentUrl = currentUrl.substring(currentUrl.lastIndexOf("#") + 1);
+        currentUrl = currentUrl.split("&")[0];
+        currentUrl = currentUrl.substring(currentUrl.lastIndexOf("=") + 1);
+        // Display the modified URL on the webpage
+        document.getElementById("currentUrl").textContent = currentUrl;
+        </script>
+</html>

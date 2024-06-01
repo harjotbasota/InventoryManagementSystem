@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title> frontend</title>
+    </head>
+    <body>
+        <style>
+            button,select {
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 4px;
+                background-color: #333;
+                color: #fff;
+                }
+            select{
+                background-color: #fff;
+                color: #333;
+            }
+    
+            button:hover{
+                background-color: #ee0f0f;
+                color: #fff;
+            }
+            body {
+              background-color: #e1dcdcc3;
+              font-family: Arial, sans-serif;
+            }
+            input[type="text"] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            }
+    
+            input[type="text"]:focus {
+                border: 2px solid #555;
+            }
+            table {
+              border-collapse: collapse;
+              width: 90%;
+            }
+            th, td {
+              border: 1px solid #2ecc07;
+              padding: 8px;
+              text-align: left;
+            }
+            tr{
+              background-color: #A5D6A7;
+            }
+            tr:hover {
+              background-color: #2ecc07;
+            }
+            th, td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+            }
+            th {
+              background-color: #2ecc07;
+              font-weight: bold;
+            }
+          </style>
+        <script>
+           var callAPI = (id,apiauthkey) =>{
+             var myHeaders=new Headers()
+             myHeaders.append("Content-Type", "application/json");
+             myHeaders.append("Authorization","Bearer " + apiauthkey);
+             var raw=JSON.stringify({"id":id});
+             var requestOptions = {
+                method: 'DELETE',
+                headers: myHeaders,
+                redirect: 'follow',
+                body: raw
+            };
+            fetch("#", requestOptions)
+            .then(response => response.json())
+            .then(data => {
+               // Update the webpage with the data
+                    document.getElementById("result").textContent = data.body;
+                     })
+            .catch(error => console.log('error', error));
+           }
+        </script>
+       <form>
+        <H1>DELETE DATA</H1>
+           <label for="name">Product ID:</label>
+           <input type="text" id="id" required><br><br>  
+           <label for="apiauthkey">Authentication Key</label>
+           <input type="text" id="apiauthkey" required><br><br>         
+           <button type="button" onclick="callAPI(document.getElementById('id').value,
+           document.getElementById('apiauthkey').value)">Delete</button>
+        </form>
+        <div id="result"></div>
+    </body>
+</html>

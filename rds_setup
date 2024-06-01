@@ -1,0 +1,28 @@
+## Installing mysql client in bastion hostname
+
+sudo apt-get update
+sudo apt-get install mariadb-client -y
+
+
+## Connecting to RDS database
+mysql -h hostname -u admin -P 3306 -p
+
+
+## Switch to inventory database
+use inventory;
+
+## Creating the inventory table
+CREATE TABLE inventory (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  quantity VARCHAR(255),
+  location VARCHAR(255),
+  unitcost VARCHAR(255),
+  totalcost VARCHAR(255),
+  lastupdate VARCHAR(255),
+  notes VARCHAR(255)
+);
+
+
+## Inserting the sample data
+insert into inventory (name,quantity,location,unitcost,totalcost,lastupdate,notes) values ('samplename',1,'nolocation',1,1,'not recorded','na');
