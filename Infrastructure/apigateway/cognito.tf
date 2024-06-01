@@ -2,16 +2,17 @@ resource "aws_cognito_user_pool" "userpool" {
   name = "userpool"
   username_attributes = ["email"]
   mfa_configuration = "OFF"
+  auto_verified_attributes = ["email"]
   account_recovery_setting {
     recovery_mechanism {
       name     = "verified_email"
       priority = 1
     }
-   } 
+   }
   email_configuration {
     email_sending_account = "COGNITO_DEFAULT"
   }
-}  
+}
 resource "aws_cognito_user_pool_domain" "domain" {
   domain       = "basota"
   user_pool_id = aws_cognito_user_pool.userpool.id
@@ -26,4 +27,3 @@ resource "aws_cognito_user_pool_client" "myclient"{
   allowed_oauth_scopes   = ["email", "openid","phone","profile","aws.cognito.signin.user.admin"]
   supported_identity_providers  = ["COGNITO"]
 }
-

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ./Infrastructure/uploadtos3
+cd ~/InventoryManagementSystem/Infrastructure/uploadtos3
 terraform destroy -auto-approve
 cd ../apigateway
 terraform destroy -auto-approve

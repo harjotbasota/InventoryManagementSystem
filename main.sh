@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ./Infrastructure/vpc
+cd ~/InventoryManagementSystem/Infrastructure/vpc
 terraform init
 terraform apply -auto-approve
 cd ../rds
