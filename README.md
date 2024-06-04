@@ -9,5 +9,6 @@ To launch this project
 - Before you launch the project you might also need to update the variable files in all terraform modules i.e, InventoryManagementSystem/Infrastructure/terraform. 
   (NOTE --  some of the variables might need special attention such as ssh_key_name, ami for instance to use( use Ubuntu 22.04.4 LTS)
 - Execute main.sh to launch this project
-- Use s3 static website URL to access the website
+- Use the aws secrets manager to access the db password which you will prompted during the infrastructure deployment process
+- Use s3 static website URL to access the website and sign up then login to get your authentication keys
 - Execute cleanup.sh to delete the resources created from this project
