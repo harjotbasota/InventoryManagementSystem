@@ -1,4 +1,5 @@
 The Inventory Management Application is a powerful solution designed to centralize and streamline large inventories. Deployed on Amazon Web Services (AWS), it adheres to a serverless architecture, ensuring scalability and cost-effectiveness. Leveraging key services such as AWS Lambda for business logic, Amazon RDS (MySQL) for data storage, Amazon API Gateway for secure API exposure, Amazon Cognito for user authentication, and Amazon S3 for static asset storage, the application efficiently manages inventory items. Infrastructure provisioning is handled seamlessly using Terraform. Additionally, an EC2 bastion host facilitates secure access to the RDS database
+Before you begin you should have ssh keys which you will use for bastion host in this project and you need to change the value of key name in variables file in /bastionhost
 To launch this project 
 - This project needs aws region us-east-1 due to region name being hardcorded provider block of all the terraform modules and other terraform code such as availability zones
 - Launch an ubuntu instance on aws which will serve as control node
